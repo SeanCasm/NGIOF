@@ -5,7 +5,7 @@ No goblins in our farm is a casual game where you have to prevent the steal of y
 
 <img src="https://user-images.githubusercontent.com/51692672/111056871-7e43d180-8461-11eb-8bce-e7e72832ae16.png" width="350" height="100">
 
-#Requires
+# Requires
 -Very powerfull pc.
 -Unity.
 -Patience.
