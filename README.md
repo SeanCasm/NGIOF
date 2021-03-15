@@ -8,9 +8,9 @@ No goblins in our farm is a casual game where you have to prevent the steal of y
 # Requires
 -Very powerfull pc.
 
--Unity.
+-Unity (to build and run).
 
--Patience.
+-Minimun be a person with two healthy hands.
 
 
 # IMPORTANT 
