@@ -38,7 +38,6 @@ public sealed class PlayerController : MonoBehaviour
     private bool idle, movement = true, onGround, death;
     public bool IsDeath { set => death = value; }
     public bool Movement { set => movement = value; }
-    public bool IsGrounded { set => onGround = value; }
     private float xInput,yInput;
     #endregion
     #region Unity Methods
@@ -62,61 +61,15 @@ public sealed class PlayerController : MonoBehaviour
             rigid.SetVelocity(0, 0);
         }
     }
-    private void Update()
-    {
-        if (movement)
-        {
-            if (!onGround) OnAir();
-            else OnGround();
-        }
-    }
     private void LateUpdate() {
-        /*Synchronizes back arm animator and the current body animator.*/
-        animator.SetBool("grounded", onGround);
-        backArmAnimator.SetBool("grounded",onGround);
+        animator.SetBool("walk", !idle);
+        backArmAnimator.SetBool("walk", !idle);
 
-
-        if(onGround){
-            animator.SetBool("walk", xInput != 0);
-            backArmAnimator.SetBool("walk", xInput != 0);
-
-            animator.SetBool("idle", xInput == 0);
-            backArmAnimator.SetBool("idle", xInput == 0);
-
-        }else{
-            animator.SetBool("walk", false);
-            animator.SetBool("walk", false);
-
-            animator.SetBool("idle", false);
-            backArmAnimator.SetBool("idle", false);
-
-        }
+        animator.SetBool("idle", idle);
+        backArmAnimator.SetBool("idle", idle);
     }
     #endregion
-    #region On air methods
-    /// <summary>
-    /// When player is in the air, at jumping or falling, evaluates some interactions.
-    /// </summary>
-    private void OnAir()
-    {
-    }
-    #endregion
-    #region On ground methods
-    private void OnGround()
-    {
-        CheckCollisionWithWallsOnMove();
-    }
-    /// <summary>
-    /// Checks posible wall colliders in front of player direction. 
-    /// </summary>
-    private void CheckCollisionWithWallsOnMove()
-    {
-        if (Physics2D.Raycast(transform.position, transform.right, distanceFront, groundLayer))
-        {
-            idle = true;
-        }
-    }
-    #endregion
+    
     #region Input
     public void OnLook(InputAction.CallbackContext context){
         mouseSightPosition=mainCam.ScreenToWorldPoint(context.ReadValue<Vector2>());
@@ -124,9 +77,9 @@ public sealed class PlayerController : MonoBehaviour
         frontArmTarget.position = mouseSight.position;
         if(secondHandGrab!=null)secondHandGrab.position = twoHandsGun.position;
         if(mouseSight.GetX()>transform.GetX()){
-            transform.localScale=new Vector2(1,1);
+            transform.localScale=new Vector2(.8f,.8f);
         }else{
-            transform.localScale = new Vector2(-1, 1);
+            transform.localScale = new Vector2(-8f, .8f);
         }
     }
     public void OnMove(InputAction.CallbackContext context)
@@ -137,10 +90,13 @@ public sealed class PlayerController : MonoBehaviour
             yInput=context.ReadValue<Vector2>().y;
             if (xInput > 0) transform.eulerAngles.Set(0, 0, 0);
             else transform.eulerAngles.Set(0, 180, 0);
+
+            idle=false;
         }
-        else{
+        else if(context.canceled){
             if(yInput!=0)yInput=0;
             if(xInput!=0)xInput=0;
+            idle=true;
         }
     }
     public void OnFire(InputAction.CallbackContext context){
