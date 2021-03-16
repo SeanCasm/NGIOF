@@ -53,6 +53,24 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: a2324f8346cb5ca4f917bd86ea6faada
+    m_Address: Assets/Prefabs/Props/Tree.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: ca383e7d0b0f46f4bb1a8cc78450f985
+    m_Address: Assets/Prefabs/Props/Tree 2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 4fa4a557480d3ae459dbe989b7f8367b
+    m_Address: Assets/Prefabs/Props/Tree 3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a1dee0ee57f8ca9428443118b358a1b2, type: 2}
   m_SchemaSet:

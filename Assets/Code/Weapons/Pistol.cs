@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Pistol : Gun
 {
-    new void Start(){
+    new void Start()
+    {
         base.Start();
-        for (int i = 0; i < totalAmmo; i++)
-        {
-            //bullets.Add(PhotonNetwork.PrefabPool.Instantiate(bulletName, shootPosition.position, Quaternion.identity));
-            bullets[i].transform.SetParent(shootPosition);
-        }
+        StartCoroutine(base.WaitBulletLoad());
+
     }
     public override void Shoot()
     {
@@ -19,8 +17,7 @@ public class Pistol : Gun
         Bullet gunBullet = obj.GetComponent<Bullet>();
         obj.SetActive(true);
         obj.transform.SetParent(null);
-        if (transform.root.localScale.x > 0) gunBullet.direction = transform.right;
-        else gunBullet.direction = -transform.right;
+        base.SetDirection(gunBullet);
         gunBullet.damage = damage;
         //gunBullet =null;
         if (totalAmmo <= 0)
