@@ -21,6 +21,21 @@ public class GameSettings : MonoBehaviour
         Application.Quit();
     }
     public void LoadScene(int index){
-        SceneManager.LoadSceneAsync(index);
+        StartCoroutine(CheckSceneLoaded(index));
+    }
+    IEnumerator CheckSceneLoaded(int index){
+        yield return null;
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index);
+        asyncOperation.allowSceneActivation = false;
+        while (!asyncOperation.isDone)
+        {
+            // Check if the load has finished
+            if (asyncOperation.progress >= 0.9f)
+            {
+                asyncOperation.allowSceneActivation = true;
+            }
+
+            yield return null;
+        }
     }
 }
