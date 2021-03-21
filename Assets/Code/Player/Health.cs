@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Game.Player{
-    public class Health : HealthBase<float>,IVisualDamageable
+    public class Health : HealthBase<int>,IVisualDamageable
     {
         private SpriteRenderer spriteRenderer;
         private float currentHealth;
@@ -24,13 +24,13 @@ namespace Game.Player{
             pController.IsDeath=true;
         }
 
-        public override void AddDamage(float amount)
+        public override void AddDamage(int amount)
         {
             currentHealth -=amount;
             //PlayerUI.updateUI.Invoke(currentHealth);
             if(currentHealth <=0)OnZeroHealth();
         }
-        public void AddHealth(float amount){
+        public void AddHealth(int amount){
             if(currentHealth<health){
                 float dif=health-currentHealth;
                 currentHealth+=amount-dif;

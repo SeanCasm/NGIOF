@@ -19,10 +19,12 @@ public class Bullet : MonoBehaviour
     }
     protected void OnTriggerEnter2D(Collider2D other) {
         switch(other.tag){
-            case "Player":
-                GetComponent<HealthBase<float>>().AddDamage(damage);
+            case "Enemy":
+                var component=other.GetComponentInParent<Ball>();
+                component.Break();
             break;
             case "Ground":
+                Destroy(gameObject);
             break;
         }
     }

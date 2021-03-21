@@ -38,7 +38,7 @@ public sealed class PlayerController : MonoBehaviour
     private bool idle, movement = true, onGround, death;
     public bool IsDeath { set => death = value; }
     public bool Movement { set => movement = value; }
-    private float xInput,yInput;
+    private float xInput;
     #endregion
     #region Unity Methods
     void Awake()
@@ -54,8 +54,7 @@ public sealed class PlayerController : MonoBehaviour
         if (movement)
         {
             float xVelo = speed * xInput * Time.deltaTime;
-            float yVelo=speed*yInput*Time.deltaTime;
-            rigid.SetVelocity(xVelo, yVelo);
+            rigid.SetVelocity(xVelo, 0);
         }
         else if (death)
         {
@@ -88,14 +87,12 @@ public sealed class PlayerController : MonoBehaviour
         if (context.performed && movement)
         {
             xInput = context.ReadValue<Vector2>().x;
-            yInput=context.ReadValue<Vector2>().y;
             if (xInput > 0) transform.eulerAngles.Set(0, 0, 0);
             else transform.eulerAngles.Set(0, 180, 0);
 
             idle=false;
         }
         else if(context.canceled){
-            if(yInput!=0)yInput=0;
             if(xInput!=0)xInput=0;
             idle=true;
         }
