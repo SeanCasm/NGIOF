@@ -8,6 +8,7 @@ public class GameSettings : MonoBehaviour
 {
     [SerializeField] GameObject redCrossMute;
     [SerializeField] AudioMixer soundsEffects;
+    [SerializeField]Animator sceneTransition;
     [SerializeField] TextMeshProUGUI percentajeText,loadingText;
     public void MuteAll(){
         bool muted = AudioListener.pause = !AudioListener.pause;
@@ -22,6 +23,7 @@ public class GameSettings : MonoBehaviour
         Application.Quit();
     }
     public void LoadScene(int index){
+        sceneTransition.enabled=true;
         StartCoroutine(CheckSceneLoaded(index));
     }
     IEnumerator CheckSceneLoaded(int index){
@@ -38,6 +40,7 @@ public class GameSettings : MonoBehaviour
             if (asyncOperation.progress >= 0.9f)
             {
                 asyncOperation.allowSceneActivation = true;
+                sceneTransition.SetTrigger("Loaded");
             }
 
             yield return null;
