@@ -5,6 +5,6 @@ using UnityEngine.AddressableAssets;
 [CreateAssetMenu(fileName="New GunClass", menuName="ScriptableObjects/Gun/GunClass")]
 public class GunClass : ScriptableObject
 {
-    [SerializeField]GameObject[] classGuns;
-    public GameObject[] ClassGuns{get=>classGuns;}
+    [SerializeField]AssetReference[] classGuns;
+    public AssetReference[] ClassGuns{get=>classGuns;}
 }

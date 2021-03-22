@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.U2D.IK;
 namespace Player
 {
@@ -17,15 +18,25 @@ namespace Player
         [SerializeField] LimbSolver2D limbSolver2D;
         private PlayerController playerController;
         public GameObject[] guns { get; set; }
-
+        private AssetReference[] asset;
+        private int assetReferenceIndex;
         private void Awake()
         {
             playerController = GetComponent<PlayerController>();
             instance = this;
-            gunClassHandler.GetClass(ClassHandler.classIndex);
+            guns=new GameObject[2];
+            asset=new AssetReference[2];
+            asset=gunClassHandler.GetClass(ClassHandler.classIndex);
+            for(int i=0;i<2;i++){
+                assetReferenceIndex=i;
+                asset[i].LoadAssetAsync<GameObject>().Completed+=LoadClass;
+            }
         }
         private void OnEnable() {
             GunUISwapper.gunSwapper += GrabAmmo;
+        }
+        private void LoadClass(UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle<GameObject> obj){
+            guns[assetReferenceIndex]=obj.Result;
         }
         public void SetGun(int index)
         {
