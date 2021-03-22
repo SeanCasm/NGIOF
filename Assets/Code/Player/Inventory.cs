@@ -12,6 +12,7 @@ namespace Player
         [SerializeField] Transform gunPoint;
         [SerializeField] Animator backArmAnimator;
         [SerializeField] Transform backArmTarget;
+        [SerializeField] GunClassHandler gunClassHandler;
         [Tooltip("Back arm LimbSolver2D to update the arm target following player aim with two hands gun.")]
         [SerializeField] LimbSolver2D limbSolver2D;
         private PlayerController playerController;
@@ -21,6 +22,7 @@ namespace Player
         {
             playerController = GetComponent<PlayerController>();
             instance = this;
+            gunClassHandler.GetClass(ClassHandler.classIndex);
         }
         private void OnEnable() {
             GunUISwapper.gunSwapper += GrabAmmo;

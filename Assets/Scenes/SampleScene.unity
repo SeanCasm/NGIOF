@@ -237,6 +237,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
+--- !u!1 &574354458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 774604432459834535, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
+  m_PrefabInstance: {fileID: 574354457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &574354459 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1076643256267752755, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
+  m_PrefabInstance: {fileID: 574354457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &574354460 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4968040375279151614, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
+  m_PrefabInstance: {fileID: 574354457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &574354461 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3735470952569819577, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
+  m_PrefabInstance: {fileID: 574354457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &574354462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8616743192146945518, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
+  m_PrefabInstance: {fileID: 574354457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ae93fb156fc6d4c828c64571fc3edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &574354463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574354458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b3c90696f74b34b961b507929a51a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontArm: {fileID: 574354464}
+  gunPoint: {fileID: 574354461}
+  backArmAnimator: {fileID: 574354460}
+  backArmTarget: {fileID: 574354459}
+  gunClassHandler: {fileID: 11400000, guid: 2551868c42237064aae6742450b1ebc6, type: 2}
+  limbSolver2D: {fileID: 574354462}
+--- !u!4 &574354464 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 253766142, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
+  m_PrefabInstance: {fileID: 574354457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &661575366
 GameObject:
   m_ObjectHideFlags: 0
