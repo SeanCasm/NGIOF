@@ -32,9 +32,5 @@ public class Shotgun : Gun
             bullet.damage = damage;
             pelletsShooted++;
         }
-        if(totalAmmo<=0){
-            Grab.throwGun.Invoke();
-            Destroy(gameObject);
-        } 
     }
 }

@@ -64,6 +64,11 @@ public class Gun : MonoBehaviour
     }
     public virtual void Shoot(){
         totalAmmo--;
+        if (totalAmmo <= 0)
+        {
+            if (grabType == HandsForGrab.one) Player.Inventory.instance.SetGun(1);
+            else Player.Inventory.instance.SetGun(2);
+        }
     }
     protected virtual void SetDirection(Bullet gunBullet){
         if (transform.root.localScale.x > 0) gunBullet.direction = transform.right;

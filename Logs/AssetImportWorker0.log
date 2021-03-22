@@ -15,13 +15,13 @@ C:/Users/Sebastian/Documents/UnityProjects/NGIOF
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-53191
+54667
 Successfully changed project path to: C:/Users/Sebastian/Documents/UnityProjects/NGIOF
 C:/Users/Sebastian/Documents/UnityProjects/NGIOF
 Using Asset Import Pipeline V2.
 Unable to join player connection multicast group.
 
-Refreshing native plugins compatible for Editor in 167.65 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 529.64 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.0b8 (4a0a5fc962a9)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.0b8/Editor/Data/Resources/UnitySubsystems
@@ -37,18 +37,70 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.0b8/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.0b8/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.0b8/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56152
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56812
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.0b8/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.0b8/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002899 seconds.
+Registered in 0.003866 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 164.69 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 184.78 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.122 seconds
+- Completed reload, in  2.586 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004715 seconds.
+Registered in 0.004905 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 186.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.924 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 1.04 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4278 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 171.7 MB.
+System memory in use after: 172.0 MB.
+
+Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 4754.
+Total: 4.556600 ms (FindLiveObjects: 0.727800 ms CreateObjectMapping: 0.451200 ms MarkObjects: 3.276300 ms  DeleteObjects: 0.098800 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Code/Player/Inventory.cs
+  artifactKey: Guid(c5b3c90696f74b34b961b507929a51a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Code/Player/Inventory.cs using Guid(c5b3c90696f74b34b961b507929a51a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51f0161c4cbfeb2f3da8499602b70536') in 0.049757 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1592.504016 seconds.
+  path: Assets/Code/Player/Inventory.cs
+  artifactKey: Guid(c5b3c90696f74b34b961b507929a51a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Code/Player/Inventory.cs using Guid(c5b3c90696f74b34b961b507929a51a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5044ed3f48f57c53eca303e87340757c') in 0.011904 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008500 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.92 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.078 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.84 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4240 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 170.1 MB.
+System memory in use after: 170.4 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 4758.
+Total: 3.884300 ms (FindLiveObjects: 0.356000 ms CreateObjectMapping: 0.282500 ms MarkObjects: 3.212000 ms  DeleteObjects: 0.031200 ms)
+

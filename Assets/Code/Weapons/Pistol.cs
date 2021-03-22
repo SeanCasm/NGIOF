@@ -19,11 +19,5 @@ public class Pistol : Gun
         obj.transform.SetParent(null);
         base.SetDirection(gunBullet);
         gunBullet.damage = damage;
-        //gunBullet =null;
-        if (totalAmmo <= 0)
-        {
-            Grab.throwGun.Invoke();
-            Destroy(gameObject);
-        }
     }
 }
