@@ -15,19 +15,24 @@ public class Shotgun : Gun
     /// Instantiate the bullets in 5 angles.
     /// </summary>
     public override void Shoot(){
-        base.Shoot();
-        for (int i = 50; i >= -50; i -= 25)
+        if (base.currentAmmo > 0)
         {
-            var v = bullets[pelletsShooted];
-            v.transform.SetParent(null);
-            v.SetActive(true);
-            Bullet bullet = v.GetComponent<Bullet>();
-            base.SetDirection(bullet);
-            Quaternion rotation = Quaternion.Euler(0, 0, i);
-            bullet.direction=rotation*bullet.direction;
-
-            bullet.damage = damage;
-            pelletsShooted++;
+            base.Shoot();
+            for (int i = 50; i >= -50; i -= 25)
+            {
+                var v = bullets[pelletsShooted];
+                v.transform.SetParent(null);
+                v.SetActive(true);
+                Bullet bullet = v.GetComponent<Bullet>();
+                base.SetDirection(bullet);
+                Quaternion rotation = Quaternion.Euler(0, 0, i);
+                bullet.direction = rotation * bullet.direction;
+                
+                bullet.gun = this;
+                bullet.damage = damage;
+                pelletsShooted++;
+            }
         }
+         
     }
 }

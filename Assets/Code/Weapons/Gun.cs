@@ -18,8 +18,7 @@ public class Gun : MonoBehaviour
     protected GameObject bullet;
     protected int currentAmmo;
     public bool selected{get;set;}
-    protected float bulletSize;
-    public static event Action reload;
+    protected float bulletSize; 
     public HandsForGrab GunGrabType{get=>grabType;}
     public enum HandsForGrab
     {
@@ -72,22 +71,22 @@ public class Gun : MonoBehaviour
     }
     public virtual void Shoot(){
         currentAmmo--;
-        GunUIHandler.gunAmmo.Invoke(iD, -bulletSize);
+        GunUIHandler.gunAmmo.Invoke(iD, -bulletSize,reloadTime);
         if (currentAmmo <= 0)
         {
-            gameObject.SetActive(false);
+            StartCoroutine(Reload());
         }
     }
     protected IEnumerator Reload()
     {
         float time=0;
-        while (time<=reloadTime)
+        while (time<reloadTime)
         {
             time+=0.1f;
             yield return new WaitForSeconds(.1f);
         }
         currentAmmo=totalAmmo;
-        GunUIHandler.gunAmmo.Invoke(iD, currentAmmo);
+        GunUIHandler.gunAmmo.Invoke(iD, currentAmmo*bulletSize,reloadTime);
     }
     protected virtual void SetDirection(Bullet gunBullet){
         if (transform.root.localScale.x > 0) gunBullet.direction = transform.right;

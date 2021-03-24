@@ -99,6 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalAmmo: 7
   damage: 1
+  reloadTime: 2
+  iD: 0
   grabType: 0
   bulletReference:
     m_AssetGUID: d4fb303461bc3584aaf80da81720fa12

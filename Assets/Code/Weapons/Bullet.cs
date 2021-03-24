@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D rigid;
     public float damage { get; set; }
-        
+    public Gun gun{get;set;}
     public Vector3 direction{get;set;}
     protected void Awake() {
         rigid=GetComponent<Rigidbody2D>();
@@ -25,11 +25,24 @@ public class Bullet : MonoBehaviour
             case "Enemy":
                 var component=other.GetComponentInParent<Ball>();
                 component.Break();
-                Destroy(gameObject);
+                BackToGun();
             break;
             case "Ground":
-                Destroy(gameObject);
+                BackToGun();
             break;
         }
+    }
+    private void OnBecameInvisible() {
+        BackToGun();
+    }
+    /// <summary>
+    /// Repositions the bullet back to the weapon that instance it.
+    /// </summary>
+    private void BackToGun(){
+        gameObject.transform.SetParent(gun.transform);
+        gameObject.transform.position=gun.transform.position;
+        direction = rigid.velocity=Vector2.zero;
+
+        gameObject.SetActive(false);
     }
 }

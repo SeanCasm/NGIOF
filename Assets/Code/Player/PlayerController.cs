@@ -102,6 +102,11 @@ public sealed class PlayerController : MonoBehaviour
             Pause.instance.PauseGame();
         }
     }
+    public void OnSelect(InputAction.CallbackContext context){
+        if(context.performed){
+            
+        }
+    }
     public void OnFire(InputAction.CallbackContext context){
         if(context.performed && movement){
             if(gun!=null && gun.gameObject.activeSelf){
