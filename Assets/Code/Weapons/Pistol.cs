@@ -11,7 +11,6 @@ public class Pistol : Gun
     }
     public override void Shoot()
     {
-        print("XD2");
         base.Shoot();
         if(base.currentAmmo>-1){
             var obj = bullets[currentAmmo];
