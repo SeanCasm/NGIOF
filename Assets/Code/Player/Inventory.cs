@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.U2D.IK;
-namespace Player
+namespace Game.Player
 {
     public class Inventory : MonoBehaviour
     {
@@ -16,8 +17,8 @@ namespace Player
         [Tooltip("Back arm LimbSolver2D to update the arm target following player aim with two hands gun.")]
         [SerializeField] LimbSolver2D limbSolver2D;
         private PlayerController playerController;
-        public GameObject[] guns { get; set; }
-
+        public static GameObject[] guns;
+        public int gunIndex{get;set;}=0;
         private void Awake()
         {
             playerController = GetComponent<PlayerController>();
@@ -37,22 +38,23 @@ namespace Player
 
             gunTransform.rotation = gunPoint.transform.parent.rotation;
             Gun gun = guns[index].GetComponent<Gun>();
+            GunUIHandler.gunInterfaceSetter.Invoke(gun);
             if (index != 0) obj.SetActive(false);
             else playerController.gun = gun;
         }
-        private void GrabAmmo(int index)
+        public void GrabAmmo(bool active)
         {
-            Gun gun = guns[index].GetComponent<Gun>();
-            gun.gameObject.SetActive(true);
+            Gun gun = guns[gunIndex].GetComponent<Gun>();
+            gun.gameObject.SetActive(active);
             playerController.gun = gun;
             if (gun.GunGrabType == Gun.HandsForGrab.two)
             {
-                limbSolver2D.gameObject.SetActive(true);
-                Transform grabPoint = guns[index].GetChild(1).transform;
+                limbSolver2D.gameObject.SetActive(active);
+                Transform grabPoint = guns[gunIndex].GetChild(1).transform;
                 playerController.twoHandsGun = grabPoint;
                 backArmTarget.SetParent(grabPoint);
                 backArmTarget.localPosition = Vector2.zero;
-                backArmAnimator.enabled = false;
+                backArmAnimator.enabled = !active;
             }
         }
     }
