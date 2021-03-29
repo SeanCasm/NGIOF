@@ -15,7 +15,7 @@ public class Shotgun : Gun
     {
         base.Shoot();
         if(base.currentAmmo>-1){
-            for (int i = 50; i >= -50; i -= 25)
+            for (int i = 30; i >= -30; i -= 15)
             {
                 var v = bullets[pelletsShooted];
                 v.transform.SetParent(null);
