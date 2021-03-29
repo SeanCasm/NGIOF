@@ -8,4 +8,7 @@ public class HealthBase<T> : MonoBehaviour
     public virtual void AddDamage(T damage){
 
     }
+    public virtual void AddHealth(T amount){
+        
+    }
 }
