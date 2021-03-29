@@ -5,23 +5,23 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GunUIHandler : MonoBehaviour
 {
+    
     [SerializeField]GameObject[] gunInterface;
     [SerializeField]Image[] gunImage,bulletImage;
     [SerializeField]RectTransform[] gunBullets;
     [SerializeField]RectTransform[] loadBars;
-    public static Action<int,float,float> gunAmmo;
-    public static Action<int,bool> swappAmmo;
+    public static Action<int,bool> ammoSwapper;
     public static Action<Gun> gunInterfaceSetter;
     private void OnEnable() {
-        gunAmmo+=AmmoHandler;
-        swappAmmo+=SwappAmmo;
+        Gun.OnAmmoZero+=AmmoUIUpdateHandler;
+        ammoSwapper+=SwappAmmo;
         gunInterfaceSetter+=SetGunUI;
     }
-    private void AmmoHandler(int index,float size,float time){
-        var sizeDelta=gunBullets[index].sizeDelta;
-        sizeDelta =new Vector2(sizeDelta.x,size);
-        gunBullets[index].sizeDelta=sizeDelta;
-        if(size ==0)StartCoroutine(Reload(index,time));
+    private void AmmoUIUpdateHandler(object sender,Gun.GunZeroAmmoEventArgs e){
+        var sizeDelta=gunBullets[e.gunIndex].sizeDelta;
+        sizeDelta =new Vector2(sizeDelta.x,e.ammoBulletSize);
+        gunBullets[e.gunIndex].sizeDelta=sizeDelta;
+        if(e.ammoBulletSize ==0)StartCoroutine(Reload(e.gunIndex,e.reloadTime));
     }
     /// <summary>
     /// Reloads a gun ammo UI.
@@ -61,8 +61,8 @@ public class GunUIHandler : MonoBehaviour
         gunInterface[current].SetActive(active);
     }
     private void OnDisable() {
-        gunAmmo-=AmmoHandler;
-        swappAmmo -= SwappAmmo;
+        Gun.OnAmmoZero -= AmmoUIUpdateHandler;
+        ammoSwapper -= SwappAmmo;
         gunInterfaceSetter -= SetGunUI;
     }
 }

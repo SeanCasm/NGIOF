@@ -5,6 +5,15 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 public class Gun : MonoBehaviour
 {
+    #region Encapsulated class
+    public class GunZeroAmmoEventArgs : EventArgs
+    {
+        public int gunIndex;
+        public float reloadTime;
+        public float ammoBulletSize;
+    }
+    #endregion
+    #region Properties
     [Header("Settings")]
     [SerializeField]protected float damage;
     [SerializeField]float reloadTime;
@@ -24,11 +33,11 @@ public class Gun : MonoBehaviour
         public float bulletWidth;
         public float bulletHeight;
     }
+    public static event EventHandler<GunZeroAmmoEventArgs> OnAmmoZero;
     public int ID{get=>iD;}
     protected GameObject bullet;
     protected int currentAmmo;
     public int CurrentAmmo{get=>currentAmmo;}
-    public bool selected{get;set;}
     public HandsForGrab GunGrabType{get=>grabType;}
     public enum HandsForGrab
     {
@@ -37,6 +46,7 @@ public class Gun : MonoBehaviour
 
     protected List<GameObject> bullets;
     protected Transform shootPosition;
+    #endregion
     protected void Start() {
         currentAmmo=gunProperties.totalAmmo;
         shootPosition=gameObject.GetChild(0).transform;
@@ -47,6 +57,7 @@ public class Gun : MonoBehaviour
         bullet=obj.Result;
         bullet.SetActive(false);
     }
+    #region IEnumerators
     protected IEnumerator WaitBulletLoad()
     {
         while (true)
@@ -79,25 +90,34 @@ public class Gun : MonoBehaviour
             yield return null;
         }
     }
+    protected IEnumerator Reload()
+    {
+        float time = 0;
+        while (time < reloadTime)
+        {
+            time += 0.1f;
+            yield return new WaitForSeconds(.1f);
+        }
+        currentAmmo = gunProperties.totalAmmo;
+        EventHandlerFunction();
+    }
+    #endregion
     public virtual void Shoot(){
         currentAmmo--;
-        GunUIHandler.gunAmmo.Invoke(iD, gunProperties.bulletWidth*currentAmmo,reloadTime);
+        EventHandlerFunction();
         if (currentAmmo <= 0)
         {
             StartCoroutine(Reload());
         }
     }
-    protected IEnumerator Reload()
-    {
-        float time=0;
-        while (time<reloadTime)
+    private void EventHandlerFunction(){
+        OnAmmoZero?.Invoke(this, new GunZeroAmmoEventArgs
         {
-            time+=0.1f;
-            yield return new WaitForSeconds(.1f);
-        }
-        currentAmmo=gunProperties.totalAmmo;
-        GunUIHandler.gunAmmo.Invoke(iD, currentAmmo*gunProperties.bulletWidth,reloadTime);
-    }
+            gunIndex = iD,
+            ammoBulletSize = gunProperties.bulletWidth * currentAmmo,
+            reloadTime = reloadTime
+        });
+    }  
     protected virtual void SetDirection(Bullet gunBullet){
         if (transform.root.localScale.x > 0) gunBullet.direction = transform.right;
         else gunBullet.direction = -transform.right;
