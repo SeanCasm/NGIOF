@@ -117,14 +117,14 @@ public sealed class PlayerController : MonoBehaviour
         {
             if (context.performed)
             {
-                GunUIHandler.swappAmmo.Invoke(inventory.gunIndex, false);//current ammo index sets to false
+                GunUIHandler.ammoSwapper.Invoke(inventory.gunIndex, false);//current ammo index sets to false
                 inventory.GrabAmmo(false);
                 inventory.gunIndex++;
                 if(inventory.gunIndex>=Inventory.guns.Length){
                     inventory.gunIndex=0;
                 }
                 inventory.GrabAmmo(true);
-                GunUIHandler.swappAmmo.Invoke(inventory.gunIndex,true);//after change ammo index
+                GunUIHandler.ammoSwapper.Invoke(inventory.gunIndex,true);//after change ammo index
             }
         }
         public void OnFire(InputAction.CallbackContext context)
