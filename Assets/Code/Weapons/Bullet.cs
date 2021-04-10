@@ -7,11 +7,17 @@ public class Bullet : MonoBehaviour
     [Header("Settings")]
     [Tooltip("Speed of the bullet, multiplied by Time.deltaTime so needs a high value.")]
     [SerializeField]float speed;
-
+    [SerializeField]float lifeTime;
     private Rigidbody2D rigid;
     public float damage { get; set; }
     public Gun gun{get;set;}
     public Vector3 direction{get;set;}
+    private void OnEnable() {
+        if (lifeTime != 0)
+        {
+            Invoke("BackToGun", lifeTime);
+        }
+    }
     protected void Awake() {
         rigid=GetComponent<Rigidbody2D>();
     }
@@ -19,14 +25,8 @@ public class Bullet : MonoBehaviour
         rigid.velocity=direction.normalized*speed*Time.deltaTime;
     }
     protected void OnTriggerEnter2D(Collider2D other) {
-        switch(other.tag){
-            case "Enemy":
-                Gun.enemiesImpacted++;
-                BackToGun();
-            break;
-            case "Ground":
-                BackToGun();
-            break;
+        if(other.tag=="Enemy" || other.tag=="Ground"){
+            BackToGun();
         }
     }
     private void OnBecameInvisible() {
@@ -36,7 +36,6 @@ public class Bullet : MonoBehaviour
     /// Repositions the bullet back to the weapon that instance it.
     /// </summary>
     private void BackToGun(){
-        Gun.Precision();
         gameObject.transform.SetParent(gun.transform);
         gameObject.transform.position=gun.transform.position;
         direction = rigid.velocity=Vector2.zero;
