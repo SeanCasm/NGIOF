@@ -98,7 +98,7 @@ public class Ball : MonoBehaviour
             }
         }
         int score=ScoreHandler.score+=points;
-        ScoreUIHandler.score.Invoke(score);
+        ScoreUIHandler.score.Invoke(score,TierCalculator.tierLvl);
         BallSpawner.totalBallsRemaining--;
         Destroy(gameObject);
     }
