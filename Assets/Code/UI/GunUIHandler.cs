@@ -5,64 +5,73 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GunUIHandler : MonoBehaviour
 {
-    
-    [SerializeField]GameObject[] gunInterface;
-    [SerializeField]Image[] gunImage,bulletImage;
-    [SerializeField]RectTransform[] gunBullets;
-    [SerializeField]RectTransform[] loadBars;
-    public static Action<int,bool> ammoSwapper;
-    public static Action<Gun> gunInterfaceSetter;
+    public static GunUIHandler instance;
+    [SerializeField]GunUI[] gunUI;
+    [System.Serializable]
+    public class GunUI
+    {
+        public GameObject gunInterface;
+        public Image gunImage, bulletImage;
+        public RectTransform gunBullets;
+        public RectTransform loadBar;
+        public float currentLoadTime{get;set;}
+        public Gun.GunZeroAmmoEventArgs e;
+    }
+    private float currentLoadTime;
+    private void Start() {
+        instance=this;
+    }
     private void OnEnable() {
         Gun.OnAmmoZero+=AmmoUIUpdateHandler;
-        ammoSwapper+=SwappAmmo;
-        gunInterfaceSetter+=SetGunUI;
     }
-    private void AmmoUIUpdateHandler(object sender,Gun.GunZeroAmmoEventArgs e){
-        var sizeDelta=gunBullets[e.gunIndex].sizeDelta;
+    private void OnDisable() {
+        Gun.OnAmmoZero -= AmmoUIUpdateHandler;
+    }
+    public void AmmoUIUpdateHandler(object sender,Gun.GunZeroAmmoEventArgs e){
+        var sizeDelta=gunUI[e.gunIndex].gunBullets.sizeDelta;
         sizeDelta =new Vector2(sizeDelta.x,e.ammoBulletSize);
-        gunBullets[e.gunIndex].sizeDelta=sizeDelta;
-        if(e.ammoBulletSize ==0)StartCoroutine(Reload(e.gunIndex,e.reloadTime));
+        gunUI[e.gunIndex].gunBullets.sizeDelta=sizeDelta;
+        if(e.ammoBulletSize ==0)StartCoroutine(Reload(e));
     }
     /// <summary>
     /// Reloads a gun ammo UI.
     /// </summary>
-    /// <param name="index">the index of the gun in the class selected</param>
-    /// <param name="time">gun time to reload</param>
-    /// <returns></returns>
-    IEnumerator Reload(int index,float time){
-        var sizeDelta=loadBars[index].sizeDelta;
-        float newSize=0;
+    IEnumerator Reload(Gun.GunZeroAmmoEventArgs e){
+        var gun = gunUI[e.gunIndex];
+        var sizeDelta=gun.loadBar.sizeDelta;
         //this float represent the loading bar increment per miliseconds.
         //126 is the load bar width on UI.
         //0.1f represents the miliseconds
-        float sizeIncrement=126/time*0.1f;
-        float currentTime=0;
-        while(currentTime<time){
-            newSize+=sizeIncrement;
-            sizeDelta=new Vector2(newSize,sizeDelta.y);
-            loadBars[index].sizeDelta=sizeDelta;
-            currentTime+=0.1f;
+        float sizeIncrement=126/e.reloadTime*0.1f;
+        while(e.currentLoadTime<e.reloadTime){
+            currentLoadTime=e.currentLoadTime;
+            sizeDelta=new Vector2(sizeDelta.x+=sizeIncrement,sizeDelta.y);
+            gun.loadBar.sizeDelta=sizeDelta;
+            e.currentLoadTime +=0.1f;
+            gun.e = e;
             yield return new WaitForSeconds(0.1f);
         }
-        loadBars[index].sizeDelta=new Vector2(0,loadBars[index].sizeDelta.y);//Sets the width back to zero. 
+        gun.loadBar.sizeDelta=new Vector2(0,gun.loadBar.sizeDelta.y);//Sets the width back to zero. 
+        gun.gunBullets.sizeDelta=new Vector2(gun.gunBullets.sizeDelta.x,e.ammoBulletMaxSize);
     }
     /// <summary>
     /// Sets guns UI at the game start.
     /// </summary>
     /// <param name="gunInterface"></param>
-    private void SetGunUI(Gun gunInterface) {
+    public void SetGunUI(Gun gunInterface) {
         var iD=gunInterface.ID;
         var str=gunInterface.gunProperties;
-        gunImage[iD].sprite=str.icon;
-        bulletImage[iD].sprite=str.bullet;
-        gunBullets[iD].sizeDelta=new Vector2(str.bulletHeight,str.totalAmmo * str.bulletWidth);
+        var gun=gunUI[gunInterface.ID];
+        gun.gunImage.sprite=str.icon;
+        gun.bulletImage.sprite=str.bullet;
+        gun.gunBullets.sizeDelta=new Vector2(str.bulletHeight,str.totalAmmo * str.bulletWidth);
     }
-    private void SwappAmmo(int current,bool active){
-        gunInterface[current].SetActive(active);
-    }
-    private void OnDisable() {
-        Gun.OnAmmoZero -= AmmoUIUpdateHandler;
-        ammoSwapper -= SwappAmmo;
-        gunInterfaceSetter -= SetGunUI;
+    public void SwappAmmo(int current,bool active){
+        gunUI[current].currentLoadTime=currentLoadTime;
+        gunUI[current].gunInterface.SetActive(active);
+        StopAllCoroutines();
+        if(active){
+            if (gunUI[current].currentLoadTime < gunUI[current].e.reloadTime) StartCoroutine(Reload(gunUI[current].e));
+        }
     }
 }
