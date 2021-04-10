@@ -110,7 +110,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 1190801c2f4ca6f4bbee1491d721059b, type: 3}
     bullet: {fileID: 1572045536873291687, guid: da2f1c8e10eaec5489602b6a4a35ff5b, type: 3}
     totalAmmo: 4
-    bulletWidth: 10
+    bulletWidth: 11
     bulletHeight: 27
   totalPellets: 5
 --- !u!1 &2070079115274251765

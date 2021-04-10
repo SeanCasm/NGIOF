@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 600
+  lifeTime: 0.5
   totalAngles: 5
 --- !u!50 &2319176100189841245
 Rigidbody2D:
