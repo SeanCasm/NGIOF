@@ -12,15 +12,12 @@ public class Pistol : Gun
     public override void Shoot()
     {
         base.Shoot();
-        if(base.currentAmmo>-1){
-            var obj = bullets[currentAmmo];
-            Bullet gunBullet = obj.GetComponent<Bullet>();
-            obj.SetActive(true);
-            obj.transform.SetParent(null);
-            base.SetDirection(gunBullet);
-            obj.transform.eulerAngles = transform.eulerAngles;
-            gunBullet.gun = this;
-            gunBullet.damage = damage;
-        }
+        var obj = bullets[currentAmmo];
+        Bullet gunBullet = obj.GetComponent<Bullet>();
+        obj.SetActive(true);
+        obj.transform.SetParent(null);
+        base.SetDirection(gunBullet);
+        obj.transform.eulerAngles = transform.eulerAngles;
+        gunBullet.gun = this;
     }
 }
