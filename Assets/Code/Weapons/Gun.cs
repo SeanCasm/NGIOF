@@ -11,13 +11,12 @@ public class Gun : MonoBehaviour
     public class GunZeroAmmoEventArgs : EventArgs
     {
         public int gunIndex;
-        public float reloadTime;
-        public float ammoBulletSize;
+        public float reloadTime,currentLoadTime,ammoBulletSize;
+        public float ammoBulletMaxSize;
     }
     #endregion
     #region Properties
     [Header("Settings")]
-    [SerializeField]protected float damage;
     [SerializeField]float reloadTime;
      
     [Tooltip("ID on the class.")]
@@ -39,11 +38,7 @@ public class Gun : MonoBehaviour
     protected GameObject bullet;
     protected int currentAmmo;
     public int CurrentAmmo{get=>currentAmmo;}
-    #region Global gun precision
-    public static int bulletsShooted;
-    public static int enemiesImpacted;
-    public static int precision;
-    #endregion
+    public float loadProgress{get;set;}
     public HandsForGrab GunGrabType{get=>grabType;}
     public enum HandsForGrab
     {
@@ -53,6 +48,14 @@ public class Gun : MonoBehaviour
     protected List<GameObject> bullets;
     protected Transform shootPosition;
     #endregion
+    private void Awake() {
+        loadProgress = reloadTime;
+    }
+    private void OnEnable() {
+        if(loadProgress<reloadTime){
+            StartCoroutine(Reload());
+        }
+    }
     protected void Start() {
         currentAmmo=gunProperties.totalAmmo;
         shootPosition=gameObject.GetChild(0).transform;
@@ -98,26 +101,23 @@ public class Gun : MonoBehaviour
     }
     protected IEnumerator Reload()
     {
-        float time = 0;
-        while (time < reloadTime)
+        EventHandlerFunction();
+        while (loadProgress < reloadTime)
         {
-            time += 0.1f;
+            loadProgress += 0.1f;
             yield return new WaitForSeconds(.1f);
         }
         currentAmmo = gunProperties.totalAmmo;
-        EventHandlerFunction();
     }
     #endregion
-    public static void Precision(){
-        precision= (enemiesImpacted/bulletsShooted)*100;
-    }
     public virtual void Shoot(){
-        bulletsShooted++;
         currentAmmo--;
         EventHandlerFunction();
         if (currentAmmo <= 0)
         {
+            loadProgress = 0;
             StartCoroutine(Reload());
+            return;
         }
     }
     private void EventHandlerFunction(){
@@ -125,12 +125,13 @@ public class Gun : MonoBehaviour
         {
             gunIndex = iD,
             ammoBulletSize = gunProperties.bulletWidth * currentAmmo,
-            reloadTime = reloadTime
+            reloadTime = reloadTime,
+            currentLoadTime=loadProgress,
+            ammoBulletMaxSize=gunProperties.bulletWidth*gunProperties.totalAmmo
         });
     }  
     protected virtual void SetDirection(Bullet gunBullet){
         if (transform.root.localScale.x > 0) gunBullet.direction = transform.right;
         else gunBullet.direction = -transform.right;
-         
     }
 }
