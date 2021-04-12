@@ -36,8 +36,8 @@ public class Bullet : MonoBehaviour
     /// Repositions the bullet back to the weapon that instance it.
     /// </summary>
     private void BackToGun(){
-        gameObject.transform.SetParent(gun.transform);
-        gameObject.transform.position=gun.transform.position;
+        gameObject.transform.SetParent(gun.shootPoint);
+        gameObject.transform.position=gun.shootPoint.position;
         direction = rigid.velocity=Vector2.zero;
 
         gameObject.SetActive(false);
