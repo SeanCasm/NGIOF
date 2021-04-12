@@ -6,9 +6,9 @@ using UnityEngine.AddressableAssets;
 public class Gun : MonoBehaviour
 {
     #region EventHandler
-    public static event EventHandler<GunZeroAmmoEventArgs> OnAmmoZero;
+    public static event EventHandler<GunAmmoEvent> OnAmmoZero;
 
-    public class GunZeroAmmoEventArgs : EventArgs
+    public class GunAmmoEvent : EventArgs
     {
         public int gunIndex;
         public float reloadTime,currentLoadTime,ammoBulletSize;
@@ -46,19 +46,19 @@ public class Gun : MonoBehaviour
     }
 
     protected List<GameObject> bullets;
-    protected Transform shootPosition;
+    public Transform shootPoint{get;set;}
     #endregion
     private void Awake() {
         loadProgress = reloadTime;
     }
     private void OnEnable() {
-        if(loadProgress<reloadTime){
+        if(currentAmmo<=0){
             StartCoroutine(Reload());
         }
     }
     protected void Start() {
         currentAmmo=gunProperties.totalAmmo;
-        shootPosition=gameObject.GetChild(0).transform;
+        shootPoint=gameObject.GetChild(0).transform;
         bullets = new List<GameObject>();
         bulletReference.LoadAssetAsync<GameObject>().Completed += OnLoadDone;
     }
@@ -75,8 +75,8 @@ public class Gun : MonoBehaviour
             {
                 for (int i = 0; i < gunProperties.totalAmmo; i++)
                 {
-                    bullets.Add(Instantiate(bullet, shootPosition.position, Quaternion.identity));
-                    bullets[i].transform.SetParent(shootPosition);
+                    bullets.Add(Instantiate(bullet, shootPoint.position, Quaternion.identity));
+                    bullets[i].transform.SetParent(shootPoint);
                 }
                 break;
             }
@@ -91,8 +91,8 @@ public class Gun : MonoBehaviour
             {
                 for (int i = 0; i < bulletAmount; i++)
                 {
-                    bullets.Add(Instantiate(bullet, shootPosition.position, Quaternion.identity));
-                    bullets[i].transform.SetParent(shootPosition);
+                    bullets.Add(Instantiate(bullet, shootPoint.position, Quaternion.identity));
+                    bullets[i].transform.SetParent(shootPoint);
                 }
                 break;
             }
@@ -121,7 +121,7 @@ public class Gun : MonoBehaviour
         }
     }
     private void EventHandlerFunction(){
-        OnAmmoZero?.Invoke(this, new GunZeroAmmoEventArgs
+        OnAmmoZero?.Invoke(this, new GunAmmoEvent
         {
             gunIndex = iD,
             ammoBulletSize = gunProperties.bulletWidth * currentAmmo,

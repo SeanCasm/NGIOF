@@ -5,6 +5,9 @@ using UnityEngine;
 public class Shotgun : Gun
 {
     [SerializeField] int totalPellets;
+    [Tooltip("Angle between pellets")]
+    [SerializeField]int angle;
+    [SerializeField]int maxAngle,minAngle;
     private int pelletsShooted = 0;
     new void Start()
     {
@@ -14,7 +17,7 @@ public class Shotgun : Gun
     public override void Shoot()
     {
         base.Shoot();
-        for (int i = 30; i >= -30; i -= 15)
+        for (int i = maxAngle; i >= minAngle; i -= angle)
         {
             var v = bullets[pelletsShooted];
             v.transform.SetParent(null);
