@@ -11,8 +11,8 @@ public sealed class BallSpawner : MonoBehaviour
     [Tooltip("Time to spawn balls throught time")]
     [SerializeField]float minTimeSpawn,maxTimeSpawn;
     List<GameObject> ballTiers=new List<GameObject>();
-    public static int difficultLevel=1;
-    private const int levelOneParentBallsOnScreen=5,levelTwoParentBallsOnScreen=6,levelThreeParentBallsOnScreen=8;
+    public static int tierLvl=1;
+    private const int lvlOneParentBallsOnScreen=4,lvlTwoParentBallsOnScreen=5,lvlThreeParentBallsOnScreen=6;
     public static int totalBallsRemaining;
     private int totalBallTiers,currentBallLoad;
     public static int parentBalls;
@@ -27,32 +27,30 @@ public sealed class BallSpawner : MonoBehaviour
     {
         ballTiers.Add(obj.Result);
         currentBallLoad++;
-        if(totalBallTiers-1==currentBallLoad-1){
-            StartCoroutine(Generator());
-        }
+        if(totalBallTiers==currentBallLoad)StartCoroutine(Generator());
     }
     #region IEnumerators
     IEnumerator Generator(){
         while(Game.Player.Health.isAlive){
-            switch(difficultLevel){
+            switch(tierLvl){
                 case 1:
-                    parentBalls++;
-                    if(parentBalls<=levelOneParentBallsOnScreen && totalBallsRemaining<levelOneParentBallsOnScreen){
+                    if(parentBalls<=lvlOneParentBallsOnScreen && totalBallsRemaining<lvlOneParentBallsOnScreen){
                         Instantiate(ballTiers[0].gameObject, SpawnerPositionGenerator(), Quaternion.identity, null);
+                        parentBalls++;
                     }
                 break;
                 case 2:
-                    parentBalls++;
-                    if (parentBalls <= levelTwoParentBallsOnScreen && totalBallsRemaining < levelOneParentBallsOnScreen)
+                    if (parentBalls <= lvlTwoParentBallsOnScreen && totalBallsRemaining < lvlTwoParentBallsOnScreen)
                     {
-                        Instantiate(ballTiers[Random.Range(0, 1)].gameObject, SpawnerPositionGenerator(), Quaternion.identity, null);
+                        Instantiate(ballTiers[Random.Range(0, 2)].gameObject, SpawnerPositionGenerator(), Quaternion.identity, null);
+                        parentBalls++;
                     }
                 break;
                 case 3:
-                    parentBalls++;
-                    if (parentBalls <= levelTwoParentBallsOnScreen && totalBallsRemaining < levelOneParentBallsOnScreen)
+                    if (parentBalls <= lvlTwoParentBallsOnScreen && totalBallsRemaining < lvlThreeParentBallsOnScreen)
                     {
-                        Instantiate(ballTiers[Random.Range(1, 2)].gameObject, SpawnerPositionGenerator(), Quaternion.identity, null);
+                        Instantiate(ballTiers[Random.Range(1, 3)].gameObject, SpawnerPositionGenerator(), Quaternion.identity, null);
+                        parentBalls++;
                     }
                 break;
             }
