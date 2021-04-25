@@ -14,6 +14,12 @@ namespace Game.Player{
             if(invulnerable)Invoke("DisableInv",invTime);
         }}
         public static bool isAlive=true;
+        private void OnEnable() {
+            DeathScreen.retry+=ResetHealth;
+        }
+        private void OnDisable() {
+            DeathScreen.retry-=ResetHealth;
+        }
         private void Awake() {
             currentHealth=health;
         }
@@ -24,10 +30,7 @@ namespace Game.Player{
                 e.color=color;
             }
             yield return new WaitForSeconds(0.1f);
-            foreach (var e in bodyRenderers)
-            {
-                e.color = Color.white;
-            }
+            ForeachSprites();
         }
         private void DisableInv(){
             invulnerable=false;
@@ -59,6 +62,20 @@ namespace Game.Player{
                 currentHealth+=amount-dif;
                 HealthUIHandler.health.Invoke(currentHealth);
             }
+        }
+        private void ForeachSprites(){
+            foreach (var e in bodyRenderers)
+            {
+                e.color = Color.white;
+            }
+        }
+        #endregion
+        #region Resets
+        private void ResetHealth(){
+            currentHealth=health;
+            invulnerable=false;
+            HealthUIHandler.health(currentHealth);
+            ForeachSprites();
         }
         #endregion
     }
