@@ -16,6 +16,7 @@ public class Pause : MonoBehaviour
     public static bool paused;
     private void OnEnable() {
         pause+=PauseGame;
+        DeathScreen.retry+=PauseGame;
     }
     protected void OnLoadDone(UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle<GameObject> obj)
     {
@@ -23,6 +24,7 @@ public class Pause : MonoBehaviour
     }
     private void OnDisable() {
         pause-=PauseGame;
+        DeathScreen.retry-=PauseGame;
     }
     private void PauseGame(){
         if(Time.timeScale==1){
