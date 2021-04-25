@@ -17,6 +17,7 @@ public class ScoreUIHandler : MonoBehaviour
     {
         score -= UpdateScore;
         scoreText.text = "Score: ";
+        text.text = "Level: ";
     }
     private void UpdateScore(int amount){
         scoreText.text="Score: "+amount.ToString();

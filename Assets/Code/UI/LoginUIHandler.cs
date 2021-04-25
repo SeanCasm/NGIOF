@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using PlayFab;
+using PlayFab.ClientModels;
 public class LoginUIHandler : MonoBehaviour
 {
     [SerializeField] Text registerMessage,loginMessage;
@@ -16,9 +18,10 @@ public class LoginUIHandler : MonoBehaviour
     public static Action<string> register;
     public static Action<string> login;
     private void OnEnable() {
-        register+=RegisterEvent;
-        login+=LoginEvent;
+       
         registerDefault=registerMessage.color;
+        login+=LoginEvent;
+        register+=RegisterEvent;
         registerSuccess.AddListener(()=>{
             registerMessage.text="Account succesfully created!";
             registerMessage.color=Color.green;
@@ -26,14 +29,14 @@ public class LoginUIHandler : MonoBehaviour
         });
     }
     private void OnDisable() {
-        register-=RegisterEvent;
         login -= LoginEvent;
+        register -= RegisterEvent;
     }
-    public void CheckCredentials(){
+    public void OnClickLogin(){
         if(onRegistry)Login.Registry(userName,password,email);
         else Login.LogIn(userName,password);
     }
-    private void LoginEvent(string details){
+    public void LoginEvent(string details){
         if(string.IsNullOrEmpty(details)){
             loginSuccess.Invoke();
         }else{
@@ -41,7 +44,7 @@ public class LoginUIHandler : MonoBehaviour
             Invoke("ClearMessage", 3f);
         }
     }
-    private void RegisterEvent(string errorDetails){
+    public void RegisterEvent(string errorDetails){
         if(!string.IsNullOrEmpty(errorDetails)){
             registerDefault = registerMessage.color;
             registerMessage.text = errorDetails;

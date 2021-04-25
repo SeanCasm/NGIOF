@@ -9,6 +9,13 @@ public sealed class Ball : Spawner
         private const int lvlOneParentBallsOnScreen = 4;
         public static int totalBallsRemaining;
         public static int parentBalls;
+        public static int ballsDestroyedInGame;
+        private void OnEnable() {
+            Game.Player.Health.onDeath+=ResetData;
+        }
+        private void OnDisable() {
+            Game.Player.Health.onDeath-=ResetData;
+        }
         private new void Start()
         {
             totalPrefabsLoaded = prefabToSpawn.Length;
@@ -94,7 +101,9 @@ public sealed class Ball : Spawner
             }
         }
         #endregion
-
+        private void ResetData(){
+            tierLvl=1;totalBallsRemaining=0;
+        }
     }
 }
  

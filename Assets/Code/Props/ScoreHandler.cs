@@ -4,7 +4,6 @@ using UnityEngine;
 
 public sealed class ScoreHandler : MonoBehaviour
 {
-    [SerializeField]Game.Player.Health pHealth;
     private static int score;
     public static int tierLvl=1;
     public static int Score

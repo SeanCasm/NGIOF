@@ -6,23 +6,26 @@ using UnityEngine.UI;
 
 public class UserDataUIHandle : MonoBehaviour
 {
-    public static UserDataUIHandle instance;
     [SerializeField]Image playerIcon;
-    [SerializeField]TMPro.TextMeshProUGUI userName;
-    [SerializeField]Text accountCreated;
-    public static Action<string> dataUI;
-    private void Start() {
-        if(instance==null){
-            instance = this;
-        }
-    }
+    [SerializeField]TMPro.TextMeshProUGUI[] userName;
+    [SerializeField]Text accountCreated,highScore,ballsDestroyed,timePlayed,totalPoints,highestLevel;
+    public static Action<PlayFabUserPersistentData> dataUpdate;
     private void OnEnable() {
-        dataUI+=SetDataUI;
+        dataUpdate+=SetDataUI;
     }
     private void OnDisable() {
-        dataUI-=SetDataUI;
+        dataUpdate-=SetDataUI;
     }
-    private void SetDataUI(string username){
-        userName.text=username;
+    
+    private void SetDataUI(PlayFabUserPersistentData playfabUserPersistentData){
+        foreach(var e in userName){
+            e.text=playfabUserPersistentData.username;
+        }
+        //accountCreated.text="Created: "+creationDate;
+        highScore.text="High score: "+playfabUserPersistentData.highscore.ToString();
+        ballsDestroyed.text="Balls destroyed: "+playfabUserPersistentData.ballsDestroyed.ToString();
+       /* timePlayed.text="Time played: "+initialUserData.timePlayed.ToString();*/
+        totalPoints.text="Total points: "+playfabUserPersistentData.totalPoints.ToString();
+        highestLevel.text="Highest level reached: "+playfabUserPersistentData.highestLevelReached.ToString();
     }
 }

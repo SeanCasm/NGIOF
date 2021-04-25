@@ -20,7 +20,7 @@ namespace Game.Props.Spawn
         }
         IEnumerator Generator(){
             while(Game.Player.Health.isAlive){
-                Instantiate(base.prefabsLoaded[Random.Range(0,totalPrefabsLoaded)],base.SpawnerPositionGenerator(),Quaternion.identity,null);
+                Instantiate(base.prefabsLoaded[Random.Range(0,totalPrefabsLoaded-1)],base.SpawnerPositionGenerator(),Quaternion.identity,null);
                 yield return new WaitForSeconds(Random.Range(minTimeSpawn,maxTimeSpawn));
             }
         }

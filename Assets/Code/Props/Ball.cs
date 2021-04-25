@@ -62,9 +62,10 @@ public class Ball : ScreenObjectMovement
                 ball.Add(obj.Result);
             }
         }
+         
         public void Break()
         {
-            PersistentData.ballsDestroyed++;
+            Game.Props.Spawn.Ball.ballsDestroyedInGame++;
             if (parentLevel == 0)
             {
                 Game.Props.Spawn.Ball.parentBalls--;

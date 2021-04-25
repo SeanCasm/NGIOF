@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-
-public class PersistentData
+using PlayFab.ClientModels;
+using PlayFab;
+public sealed class PersistentData:MonoBehaviour
 {
     private static string userName;
-    private static int highScore;
-    public static int ballsDestroyed;
-    public static int HighScore
-    {
-        get => highScore;
-        set
-        {
-            if (value > highScore)
-            {
-                highScore = value;
-            }
-        }
+    public static int highscore,totalPoints,ballsDestroyed,highestLevelReached;
+    private static string password;
+     
+    private void OnEnable() {
+        Game.Player.Health.onDeath+=UpdateAllPlayFabUserData;
     }
-    public static void SetUserName(string username)
-    {
-        userName=username;
-        UserDataUIHandle.dataUI(username);
+    private void OnDisable() {
+        Game.Player.Health.onDeath-=UpdateAllPlayFabUserData;
     }
+    private void UpdateAllPlayFabUserData(){
+        UpdatePlayfabUserData.UpdateAll();
+    }
+    public static void SetPersistentData(PlayFabUserPersistentData playfabUserPersistentData){
+        userName=playfabUserPersistentData.username;
+        password=playfabUserPersistentData.password;
+        highscore=playfabUserPersistentData.highscore;
+        totalPoints=playfabUserPersistentData.totalPoints;
+        ballsDestroyed=playfabUserPersistentData.ballsDestroyed;
+        highestLevelReached=playfabUserPersistentData.highestLevelReached;
+        UserDataUIHandle.dataUpdate(playfabUserPersistentData);
+    } 
 }

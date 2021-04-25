@@ -1,0 +1,111 @@
+Using pre-set license
+Built from '2021.1/staging' branch; Version is '2021.1.2f1 (e5d502d80fbb) revision 15062274'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19042.928; Version 2009; 64bit' Language: 'es' Physical Memory: 7984 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.1.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+C:/Users/Sebastian/Documents/UnityProjects/NGIOF
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+56425
+Successfully changed project path to: C:/Users/Sebastian/Documents/UnityProjects/NGIOF
+C:/Users/Sebastian/Documents/UnityProjects/NGIOF
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 286.02 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.1.2f1 (e5d502d80fbb)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Sebastian/Documents/UnityProjects/NGIOF/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 620 (ID=0x5916)
+    Vendor:   Intel
+    VRAM:     3992 MB
+    Driver:   23.20.16.4973
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56784
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001922 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 150.65 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.558 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005457 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 152.13 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.154 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.12 seconds
+Refreshing native plugins compatible for Editor in 1.00 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4576 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 184.4 MB.
+System memory in use after: 184.6 MB.
+
+Unloading 36 unused Assets to reduce memory usage. Loaded Objects now: 5049.
+Total: 4.473500 ms (FindLiveObjects: 0.396900 ms CreateObjectMapping: 0.436600 ms MarkObjects: 3.551500 ms  DeleteObjects: 0.086200 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Prefabs/Items/Heart.prefab
+  artifactKey: Guid(f9f2d041469a14f43b5b18b0672121eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Items/Heart.prefab using Guid(f9f2d041469a14f43b5b18b0672121eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f88e386d05e506600ab5ba53813f38d7') in 0.281113 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/Prefabs/Items/Shield.prefab
+  artifactKey: Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Items/Shield.prefab using Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '948e7fa9edb926db625a156862f052e0') in 0.085575 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 27.118241 seconds.
+  path: Assets/Prefabs/Items/Shield.prefab
+  artifactKey: Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Items/Shield.prefab using Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c917a8e37796ad5c07feedb096203307') in 0.026495 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.621304 seconds.
+  path: Assets/Prefabs/Items/Shield.prefab
+  artifactKey: Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Items/Shield.prefab using Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fcbd5f157227794fbd4d7740cb7edd7') in 0.062344 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.994011 seconds.
+  path: Assets/Prefabs/Items/Shield.prefab
+  artifactKey: Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Items/Shield.prefab using Guid(69aab42bf2c241844bce56d8a7518ba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b2215936cc5a3348c325e6964e0a69d') in 0.100614 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.170200 seconds.
+  path: Assets/Prefabs/Items/Heart.prefab
+  artifactKey: Guid(f9f2d041469a14f43b5b18b0672121eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Items/Heart.prefab using Guid(f9f2d041469a14f43b5b18b0672121eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1c4a6e129a8e7b7bbafff6beaa362a9') in 0.032929 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.439976 seconds.
+  path: Assets/Prefabs/Items/Heart.prefab
+  artifactKey: Guid(f9f2d041469a14f43b5b18b0672121eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Items/Heart.prefab using Guid(f9f2d041469a14f43b5b18b0672121eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4d73224a6ec8f298745c7f0117f84ae') in 0.068886 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

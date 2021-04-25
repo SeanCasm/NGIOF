@@ -7,6 +7,7 @@ namespace Game.Player{
         [SerializeField]SpriteRenderer[] bodyRenderers;
         private int currentHealth;
         private bool invulnerable;
+        public static System.Action onDeath;
         public float invTime{get;set;}=2;
         public bool Invulnerable{get=>invulnerable;set{
             invulnerable=value;
@@ -37,7 +38,8 @@ namespace Game.Player{
             isAlive=pController.Movement =false;
             pController.IsDeath=true;
             gameObject.SetActive(false);
-            PersistentData.HighScore=ScoreHandler.Score;
+            onDeath.Invoke();
+                        
         }
 
         public override void AddDamage(int amount)
