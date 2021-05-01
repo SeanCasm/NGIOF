@@ -119,13 +119,13 @@ public sealed class PlayerController : MonoBehaviour,IPausable
         {
             if (context.performed)
             {
-                GunUIHandler.swapp(inventory.gunIndex, false);//current ammo index sets to false
+                GunUIHandler.swap(inventory.gunIndex, false);//current ammo index sets to false
                 inventory.GrabAmmo(false);
 
                 inventory.gunIndex++;
                 
                 inventory.GrabAmmo(true);
-                GunUIHandler.swapp(inventory.gunIndex, true);//after change ammo index
+                GunUIHandler.swap(inventory.gunIndex, true);//after change ammo index
             }
         }
         public void OnFire(InputAction.CallbackContext context)

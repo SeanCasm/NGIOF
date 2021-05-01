@@ -25,7 +25,7 @@ public static class Login
                     InitializeUser();
                 }else{
                      
-                    PlayFabClientAPI.GetUserData(new GetUserDataRequest{Keys=new List<string>{"totalPoints","highscore","ballsDestroyed","highestLevelReached"}},
+                    PlayFabClientAPI.GetUserData(new GetUserDataRequest{Keys=new List<string>{"stats"}},
                     resultCallback=>{
                         var stats=resultCallback.Data["stats"].Value;
                         Stats st=JsonUtility.FromJson<Stats>(stats);

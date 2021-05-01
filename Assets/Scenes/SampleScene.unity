@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834f7c5d937ddbb48be9fbc5045458e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pHealth: {fileID: 574354459}
 --- !u!4 &30687438
 Transform:
   m_ObjectHideFlags: 0
@@ -221,6 +220,9 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
   - m_AssetGUID: f9f2d041469a14f43b5b18b0672121eb
+    m_SubObjectName: 
+    m_SubObjectType: 
+  - m_AssetGUID: 5623d67676a5eb145ae63cc23fc3ae15
     m_SubObjectName: 
     m_SubObjectType: 
   spawnerLeftSide: {x: -12.32, y: 11.96}
@@ -308,17 +310,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
---- !u!114 &574354459 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2337010755858762705, guid: db929a2c90d50024aaa69fd4da518b56, type: 3}
-  m_PrefabInstance: {fileID: 574354457}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67a6ae3c0a08aae4d91c9b52d50747e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &661575366
 GameObject:
   m_ObjectHideFlags: 0

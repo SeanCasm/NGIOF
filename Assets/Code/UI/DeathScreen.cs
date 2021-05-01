@@ -7,15 +7,15 @@ public class DeathScreen : MonoBehaviour
     [SerializeField]Canvas canvas;
     [SerializeField]AssetReference deathScreenRef;
     private GameObject deathScreen,deathScreenPrefab;
-    public static System.Action retry;
+    public static System.Action deathPause,retry;
 
     private void OnEnable() {
         Game.Player.Health.onDeath+=ShowScreen;
-        retry+=Retry;
+        retry +=Retry;
     }
     private void OnDisable() {
         Game.Player.Health.onDeath -= ShowScreen;
-        retry-=Retry;
+        retry -=Retry;
     }
     private void Start() {
         deathScreenRef.LoadAssetAsync<GameObject>().Completed+=OnLoadDone;

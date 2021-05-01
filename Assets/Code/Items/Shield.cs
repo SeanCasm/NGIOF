@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Game.Collectibles{
-public class Shield : Collectible
+public sealed class Shield : Collectible
     {
         [SerializeField] float protectTime;
         new void Awake()
@@ -14,17 +14,16 @@ public class Shield : Collectible
             base.Start();
         }
         new void OnCollisionEnter2D(Collision2D other) {
-            base.OnCollisionEnter2D(other);  
+            base.OnCollisionEnter2D(other);
         }
-        private void OnTriggerEnter2D(Collider2D other)
-        {
+        private void OnTriggerEnter2D(Collider2D other) {
             if (other.CompareTag("Player"))
             {
-                var pHealth = other.GetComponent<Game.Player.Health>();
+                var pHealth = other.GetComponentInParent<Game.Player.Health>();
                 pHealth.Invulnerable = true;
                 pHealth.invTime = protectTime;
+                Destroy(gameObject);
             }
         }
     }
-
 }

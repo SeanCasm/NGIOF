@@ -13,10 +13,10 @@ public class Pause : MonoBehaviour
     private GameObject leaveGameIns;
     public static Action pause;
     public static event Action<bool> Paused;
-    public static bool paused;
     private void OnEnable() {
         pause+=PauseGame;
-        DeathScreen.retry+=PauseGame;
+        DeathScreen.deathPause+=PauseAtDeath;
+        DeathScreen.retry+=UnPauseAtDeath;
     }
     protected void OnLoadDone(UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle<GameObject> obj)
     {
@@ -24,7 +24,11 @@ public class Pause : MonoBehaviour
     }
     private void OnDisable() {
         pause-=PauseGame;
-        DeathScreen.retry-=PauseGame;
+        DeathScreen.deathPause-=PauseAtDeath;
+        DeathScreen.retry -= UnPauseAtDeath;
+    }
+    private void PauseAtDeath(){
+        Time.timeScale = 0;
     }
     private void PauseGame(){
         if(Time.timeScale==1){
@@ -34,6 +38,9 @@ public class Pause : MonoBehaviour
         } else {
             Unpause();
         }
+    }
+    private void UnPauseAtDeath(){
+        Time.timeScale=1;
     }
     private void Unpause(){
         canvas.SetActive(false);

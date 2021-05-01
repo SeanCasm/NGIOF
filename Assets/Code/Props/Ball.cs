@@ -31,6 +31,7 @@ public class Ball : ScreenObjectMovement
             Game.Props.Spawn.Ball.totalBallsRemaining++;
             direction = Random.insideUnitCircle.normalized;
             childBall.LoadAssetAsync<GameObject>().Completed += OnComplete;
+            GameSceneObjects.allObjects.Add(gameObject);
         }
         new void FixedUpdate()
         {

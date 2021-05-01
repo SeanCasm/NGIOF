@@ -39,6 +39,7 @@ public class Gun : MonoBehaviour
     protected int currentAmmo;
     public int CurrentAmmo{get=>currentAmmo;}
     public float loadProgress{get;set;}
+    public static Action instaLoad;
     public HandsForGrab GunGrabType{get=>grabType;}
     public enum HandsForGrab
     {
@@ -56,6 +57,10 @@ public class Gun : MonoBehaviour
         if(currentAmmo<=0){
             StartCoroutine(Reload());
         }
+        instaLoad+=ReloadAllInstantly;
+    }
+    private void OnDisable() {
+        instaLoad -= ReloadAllInstantly;
     }
     protected void Start() {
         shootPoint=gameObject.GetChild(0).transform;
@@ -119,6 +124,11 @@ public class Gun : MonoBehaviour
             StartCoroutine(Reload());
             return;
         }
+    }
+    private void ReloadAllInstantly(){
+        StopAllCoroutines();
+        currentAmmo=gunProperties.totalAmmo;
+        EventHandlerFunction();
     }
     private void EventHandlerFunction(){
         OnShoot?.Invoke(this, new GunCurrentInfo

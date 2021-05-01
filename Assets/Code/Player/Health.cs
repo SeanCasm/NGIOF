@@ -42,7 +42,7 @@ namespace Game.Player{
             pController.IsDeath=true;
             gameObject.SetActive(false);
             onDeath.Invoke();
-                        
+            DeathScreen.deathPause.Invoke();         
         }
 
         public override void AddDamage(int amount)

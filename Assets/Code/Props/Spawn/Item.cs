@@ -5,13 +5,14 @@ namespace Game.Props.Spawn
 {
     public sealed class Item : Spawner
     {
+        const float shieldProb=40f,healthProb=40f,reloadProb=20f;
         private void OnEnable() {
-            DeathScreen.retry+=ResetData;
-            DeathScreen.retry +=ResetCoroutine;
+            DeathScreen.deathPause+=ResetData;
+            DeathScreen.deathPause +=ResetCoroutine;
         }
         private void OnDisable() {
-            DeathScreen.retry -= ResetData;
-            DeathScreen.retry -= ResetCoroutine;
+            DeathScreen.deathPause -= ResetData;
+            DeathScreen.deathPause -= ResetCoroutine;
         }
         private new void Start()
         {
@@ -28,13 +29,19 @@ namespace Game.Props.Spawn
         }
         IEnumerator Generator(){
             while(Game.Player.Health.isAlive){
-                prefabsInstantiated.Add(Instantiate(base.prefabsLoaded[Random.Range(0,totalPrefabsLoaded-1)],base.SpawnerPositionGenerator(),Quaternion.identity,null));
-                yield return new WaitForSeconds(Random.Range(minTimeSpawn,maxTimeSpawn));
+                yield return new WaitForSeconds(Random.Range(minTimeSpawn, maxTimeSpawn));
+                float n=Random.Range(0f,1f);
+                if(n<=40)Instantiate(base.prefabsLoaded[0]);
+                else if(n>40 && n<=80)Instantiate(base.prefabsLoaded[1]);
+                else if (n > 80) Instantiate(base.prefabsLoaded[2]);
             }
+        }
+        private void Instantiate(GameObject obj){
+            GameSceneObjects.allObjects.Add(Instantiate(obj, base.SpawnerPositionGenerator(), Quaternion.identity, null));
         }
         private void ResetData()
         {
-            base.ClearAll();
+            GameSceneObjects.ClearAll();
         }
         private void ResetCoroutine()
         {

@@ -7,7 +7,7 @@ namespace Game.Props{
     /// </summary>
     public class Health : HealthBase<int>
     {
-        [Tooltip("Hurtbox identificator, requested on acquired guns or items in game.")]
+        [Tooltip("Hurtbox identificator, resquired in acquired guns or items in game.")]
         [SerializeField]int iD;
         public int ID{get=>iD;}
         private SpriteRenderer spriteRenderer;

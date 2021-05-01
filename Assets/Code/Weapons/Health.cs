@@ -15,12 +15,9 @@ namespace Game.Collectibles{
         new void OnCollisionEnter2D(Collision2D other)
         {
             base.OnCollisionEnter2D(other);
-        }
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player"))
             {
-                var pHealth = other.GetComponent<Game.Player.Health>();
+                var pHealth = other.gameObject.GetComponent<Game.Player.Health>();
                 pHealth.AddHealth(healthRestore);
             }
         }

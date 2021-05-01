@@ -36,10 +36,10 @@ public sealed class ScoreHandler : MonoBehaviour
         }
     } 
     private void OnEnable() {
-        DeathScreen.retry+=ResetScore;
+        DeathScreen.deathPause+=ResetScore;
     }
     private void OnDisable() {
-        DeathScreen.retry -= ResetScore;
+        DeathScreen.deathPause -= ResetScore;
     }
     private void ResetScore(){
         Score=0;

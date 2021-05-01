@@ -23,18 +23,31 @@ public class GunUIHandler : MonoBehaviour
             if (currentLoadTime <e.reloadTime && e.currentAmmo == 0) return true;
             return false;
         }
+        public void UpdateBullets(){
+            gunBullets.sizeDelta.Set(e.ammoBulletSize,gunBullets.sizeDelta.y);
+        }
     }
-    public static Action<int,bool>swapp;
+    public static Action<int,bool> swap;
     public static Action<Gun>gunInterface;
     private void OnEnable() {
-        swapp+=SwappAmmo;
+        swap+=SwappAmmo;
         Gun.OnShoot += AmmoUIUpdateHandler;
         gunInterface+=SetGunUI;
+        Gun.instaLoad+=ReloadAllInstantly;
     }
     private void OnDisable() {
-        swapp -= SwappAmmo;
+        swap -= SwappAmmo;
         Gun.OnShoot -= AmmoUIUpdateHandler;
         gunInterface-=SetGunUI;
+        Gun.instaLoad -= ReloadAllInstantly;
+    }
+    private void ReloadAllInstantly(){
+        StopAllCoroutines();
+        foreach(var v in gunUI){
+            v.loadBar.sizeDelta=new Vector2(0,v.loadBar.sizeDelta.y);
+            v.gunBullets.sizeDelta=new Vector2(v.gunBullets.sizeDelta.x,v.e.ammoBulletMaxSize);
+            v.e.currentLoadTime=v.e.reloadTime;
+        }
     }
     private void AmmoUIUpdateHandler(object sender,Gun.GunCurrentInfo e){
         var sizeDelta=gunUI[e.gunIndex].gunBullets.sizeDelta;
@@ -79,6 +92,7 @@ public class GunUIHandler : MonoBehaviour
         gunUI[current].gunInterface.SetActive(active);
         if(active && gunUI[current].e!=null ){
             if(gunUI[current].CheckReload())StartCoroutine(Reload(gunUI[current].e));
+            gunUI[current].UpdateBullets();
         } 
     }
 }

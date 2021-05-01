@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2a3ddb691a57244b3869f4709911a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
   speed: 5
+  damage: 1
   points: 1
   totalChilds: 2
   childBall:
@@ -126,7 +126,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1298068113
 CircleCollider2D:
   m_ObjectHideFlags: 0

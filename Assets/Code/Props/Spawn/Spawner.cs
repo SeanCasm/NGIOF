@@ -9,7 +9,6 @@ public class Spawner : MonoBehaviour
         [SerializeField] protected float minTimeSpawn, maxTimeSpawn;
         protected int totalPrefabsLoaded,currentPrefabOnLoad;
         protected List<GameObject> prefabsLoaded = new List<GameObject>();
-        protected List<GameObject> prefabsInstantiated=new List<GameObject>();
         protected void Start()
         {
             totalPrefabsLoaded = prefabToSpawn.Length;
@@ -29,12 +28,4 @@ public class Spawner : MonoBehaviour
             var yPos = Random.Range(spawnerLeftSide.y, spawnerRightSide.y);
             return new Vector2(xPos, yPos);
         }
-        protected void ClearAll(){
-            foreach (GameObject g in prefabsInstantiated)
-            {
-                Destroy(g);
-            }
-            prefabsInstantiated = new List<GameObject>();
-        }
     }
- 

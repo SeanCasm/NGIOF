@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour,IBullet
     }
     protected void Awake() {
         rigid=GetComponent<Rigidbody2D>();
+        GameSceneObjects.allObjects.Add(gameObject);
     }
     protected void FixedUpdate() {
         rigid.velocity=direction.normalized*speed*Time.deltaTime;
